@@ -11,7 +11,7 @@ inputs:
     default: ${{ github.ref_name }}
   jobset_url:
     required: true
-    default: "github:${{ github.repository }}/${{ github.ref_name }}"
+    default: "github:${{ github.repository }}/${{ github.sha }}"
   secrets:
     required: true
 runs:
