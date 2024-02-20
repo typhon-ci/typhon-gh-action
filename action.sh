@@ -48,7 +48,7 @@ do
     echo "Job \"$JOB\""
 
     echo "##[group]Action \"begin\""
-    mk_input | actions/begin
+    mk_input | sandbox actions/begin
     echo "##[endgroup]"
 
     echo "##[group]Nix build"
@@ -56,6 +56,6 @@ do
     echo "##[endgroup]"
 
     echo "##[group]Action \"end\""
-    mk_input | actions/end
+    mk_input | sandbox actions/end
     echo "##[endgroup]"
 done
