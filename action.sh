@@ -36,6 +36,7 @@ sandbox() {
         --ro-bind /nix/store /nix/store \
         --ro-bind /nix/var/nix /nix/var/nix \
         --ro-bind /etc/resolv.conf /etc/resolv.conf \
+        --ro-bind /etc/passwd /etc/passwd \
         --clearenv \
         --unshare-pid \
         $1
