@@ -12,6 +12,8 @@ inputs:
   jobset_url:
     required: true
     default: "github:${{ github.repository }}/${{ github.ref_name }}"
+  secrets:
+    required: true
 runs:
   using: "composite"
   steps:
@@ -22,4 +24,4 @@ runs:
         PROJECT_URL: ${{ inputs.project_url }}
         JOBSET_NAME: ${{ inputs.jobset_name }}
         JOBSET_URL: ${{ inputs.jobset_url }}
-        SECRETS: ${{ secrets.TYPHON_SECRETS }}
+        SECRETS: ${{ inputs.secrets }}
