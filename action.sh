@@ -4,7 +4,7 @@ SYSTEM="x86_64-linux"
 [ "$(nix eval --impure --raw --expr builtins.currentSystem)" == "$SYSTEM" ] || exit 1
 
 echo "##[group]Build actions"
-ACTIONS=$(nix eval --json "$PROJECT_URL#typhonProject.actions.$SYSTEM")
+ACTIONS=$(nix eval --json "$PROJECT_URL#typhonProject.actions.$SYSTEM" | jq -r)
 nix build "$PROJECT_URL#typhonProject.actions.$SYSTEM"
 echo "##[endgroup]"
 
