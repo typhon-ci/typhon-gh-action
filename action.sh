@@ -3,7 +3,9 @@
 SYSTEM="x86_64-linux"
 [ "$(nix eval --impure --raw --expr builtins.currentSystem)" == "$SYSTEM" ] || exit 1
 
+echo "##[group]Build actions"
 nix build "$PROJECT_URL#typhonProject.actions.$SYSTEM" -o actions
+echo "##[endgroup]"
 
 JOBS=$(nix eval --json "$JOBSET_URL#typhonJobs.$SYSTEM" | \
     jq -r 'to_entries | .[] | "[" + (.key | @sh) + "]=" + (.value | @sh)' \
@@ -44,7 +46,7 @@ do
     OUT=${JOBS[$JOB]}
     STATUS="pending"
 
-    echo ""
+    echo "\n"
     echo "Job \"$JOB\""
 
     echo "##[group]Action \"begin\""
