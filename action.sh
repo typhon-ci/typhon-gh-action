@@ -47,7 +47,7 @@ do
     OUT=${JOBS[$JOB]}
     STATUS="pending"
 
-    echo "\n"
+    echo ""
     echo "Job \"$JOB\""
 
     echo "##[group]Action \"begin\""
