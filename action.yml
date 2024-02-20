@@ -17,6 +17,10 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
     - run: action.sh
       shell: bash
       env:
