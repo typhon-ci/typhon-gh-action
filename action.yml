@@ -1,0 +1,25 @@
+name: 'Typhon'
+inputs:
+  project_name:
+    required: true
+    default: ${{ github.repository }}
+  project_url:
+    required: true
+    default: "github:${{ github.repository }}"
+  jobset_name:
+    required: true
+    default: ${{ github.ref_name }}
+  jobset_url:
+    required: true
+    default: "github:${{ github.repository }}/${{ inputs.jobset_name }}"
+runs:
+  using: "composite"
+  steps:
+    - run: action.sh
+      shell: bash
+      env:
+        PROJECT_NAME: ${{ inputs.project_name }}
+        PROJECT_URL: ${{ inputs.project_url }}
+        JOBSET_NAME: ${{ inputs.jobset_name }}
+        JOBSET_URL: ${{ inputs.jobset_url }}
+        SECRETS: ${{ secrets.TYPHON_SECRETS }}
