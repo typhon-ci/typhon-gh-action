@@ -44,6 +44,7 @@ do
     OUT=${JOBS[$JOB]}
     STATUS="pending"
 
+    echo ""
     echo "Job \"$JOB\""
 
     echo "##[group]Action \"begin\""
@@ -57,6 +58,4 @@ do
     echo "##[group]Action \"end\""
     mk_input | actions/end
     echo "##[endgroup]"
-
-    echo ""
 done
