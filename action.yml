@@ -21,7 +21,7 @@ runs:
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - run: nix shell nixpkgs#bubblewrap nixpkgs#jo nixpkgs#jq --command ./action.sh
+    - run: nix shell nixpkgs#bubblewrap nixpkgs#jo nixpkgs#jq --command action.sh
       shell: bash
       env:
         PROJECT_NAME: ${{ inputs.project_name }}
