@@ -4,7 +4,8 @@ SYSTEM="x86_64-linux"
 [ "$(nix eval --impure --raw --expr builtins.currentSystem)" == "$SYSTEM" ] || exit 1
 
 echo "##[group]Build actions"
-nix build "$PROJECT_URL#typhonProject.actions.$SYSTEM" -o actions
+ACTIONS=$(nix eval --json "$PROJECT_URL#typhonProject.actions.$SYSTEM")
+nix build "$PROJECT_URL#typhonProject.actions.$SYSTEM"
 echo "##[endgroup]"
 
 JOBS=$(nix eval --json "$JOBSET_URL#typhonJobs.$SYSTEM" | \
@@ -50,7 +51,7 @@ do
     echo "Job \"$JOB\""
 
     echo "##[group]Action \"begin\""
-    mk_input | sandbox actions/begin
+    mk_input | sandbox "$ACTIONS/begin"
     echo "##[endgroup]"
 
     echo "##[group]Nix build"
@@ -58,6 +59,6 @@ do
     echo "##[endgroup]"
 
     echo "##[group]Action \"end\""
-    mk_input | sandbox actions/end
+    mk_input | sandbox "$ACTIONS/end"
     echo "##[endgroup]"
 done
