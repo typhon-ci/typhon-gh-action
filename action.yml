@@ -12,7 +12,7 @@ inputs:
   jobset_url:
     required: true
     default: "github:${{ github.repository }}/${{ github.sha }}"
-  key:
+  secrets:
     required: true
 runs:
   using: "composite"
@@ -23,7 +23,6 @@ runs:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
     - run: |
         nix shell \
-          nixpkgs#age \
           nixpkgs#bubblewrap \
           nixpkgs#jo \
           nixpkgs#jq \
@@ -34,4 +33,4 @@ runs:
         PROJECT_URL: ${{ inputs.project_url }}
         JOBSET_NAME: ${{ inputs.jobset_name }}
         JOBSET_URL: ${{ inputs.jobset_url }}
-        KEY: ${{ inputs.key }}
+        SECRETS: ${{ inputs.secrets }}

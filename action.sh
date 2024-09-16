@@ -8,8 +8,7 @@ ACTIONS=$(nix eval --json "$PROJECT_URL#typhonProject.actions.$SYSTEM" | jq -r)
 nix build "$PROJECT_URL#typhonProject.actions.$SYSTEM"
 echo "##[endgroup]"
 
-echo "$KEY" > identity.txt
-SECRETS=$(cat "$ACTIONS/secrets" | age --decrypt -i identity.txt | jq -c)
+SECRETS=$(echo "$SECRETS" | jq -c)
 
 JOBS=$(nix eval --json "$JOBSET_URL#typhonJobs.$SYSTEM" | \
     jq -r 'to_entries | .[] | "[" + (.key | @sh) + "]=" + (.value | @sh)' \
