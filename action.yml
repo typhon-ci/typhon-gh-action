@@ -17,16 +17,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+    - run: which bwrap jo jq
       shell: bash
-      env:
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - run: |
-        nix shell \
-          nixpkgs#bubblewrap \
-          nixpkgs#jo \
-          nixpkgs#jq \
-          --command action.sh
+    - run: ${{ github.action_path }}/action.sh
       shell: bash
       env:
         PROJECT_NAME: ${{ inputs.project_name }}
